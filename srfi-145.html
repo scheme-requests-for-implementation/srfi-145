@@ -30,7 +30,11 @@ Marc Nieper-Wi&szlig;kirchen
   <li>Finalized: 2017-03-31</li>
   <li>Revised to fix errata:
     <ul>
-      <li>2017-04-03 (Fixed example.)</li></ul></li>
+      <li>2017-04-03 (Fixed example.)</li>
+      <li>2020-08-18 (Fixed <a href="#simple-implementation">first
+	sample implementation</a> of <code>assume</code> to return
+	<code>obj</code> on success, as required by the
+	specification.)</li></ul></li>
 </ul>
 
 <h1>Abstract</h1>
@@ -221,7 +225,7 @@ never taken. Thus any expression in this path is simply superfluous.</i></p>
 A simple implementation for R7RS can be given as follows:
 </p>
 
-<pre>
+<pre id="simple-implementation">
 (define-library (srfi 145)
   (export assume)
   (import (scheme base))
@@ -229,8 +233,8 @@ A simple implementation for R7RS can be given as follows:
     (define-syntax assume
       (syntax-rules ()
         ((assume expression message ...)
-         (unless expression
-           (fatal-error "invalid assumption" (quote expression) (list message ...))))
+         (or expression
+             (fatal-error "invalid assumption" (quote expression) (list message ...))))
         ((assume . _)
          (syntax-error "invalid assume syntax"))))
   (cond-expand
@@ -282,7 +286,7 @@ particular John Cowan and Jim Rees.
 </p>
 
 <h1>Copyright</h1>
-Copyright (C) Marc Nieper-Wi&szlig;kirchen (2016).  All Rights Reserved. 
+Copyright (C) Marc Nieper-Wi&szlig;kirchen (2016).  All Rights Reserved.
 
 <p>
   Permission is hereby granted, free of charge, to any person
