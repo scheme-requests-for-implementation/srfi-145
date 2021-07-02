@@ -6,6 +6,8 @@
 
 keywords: [[https://srfi.schemers.org/?keywords=optimization][Optimization]]
 
+library-name: assume
+
 This repository hosts [[https://srfi.schemers.org/srfi-145/][SRFI 145]]: Assumptions, a [[https://srfi.schemers.org/][Scheme Request for Implementation]].
 
 This SRFI is in /final/ status.
